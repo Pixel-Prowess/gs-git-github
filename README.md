@@ -65,6 +65,27 @@ Once you've downloaded and installed Git, there's a few basic set up commands yo
 
 ---
 
+## Connecting to Remote
+You can connect a local repo to a remote location like Github using the remote commands.
+- `git remote add <remote-name> https://github.com/<username>/<reponame>.git`
+	- The remote command is how we manage our connections to other places. 
+	- The traditional `remote-name` is `origin` and it will be the default if you clone a repo from GitHub.
+	- After the `remote-name` is the URL to Github, this usually have your `username` and `repository` name, but it can also have an `organization` name. It should also always end with `.git`
+	- You can add multiple remotes if you want to 
+- `git push -u <remote-name> main`
+	- In addition to connecting to the remote, you also have to connect branches with their counterparts on GitHub.
+	- The `-u` sets the default upstream branch for a branch, making pull and git push operations so you don't have to specify the remote and branch each time.
+	- You can also push all branches to the remote with `git push --all`
+
+### Exercises
+Lets connect our local repository to our GitHub repo.
+- **Copy** the URL to your GitHub repository
+- On your local copy of the repo, type in `https://github.com/<username>/<reponame>.git` using your username and reponame.
+- Issue a `git push -u origin main` to push your main directory
+- Go back to your GitHub Repo and see the updated repo.
+
+---
+
 ## Working Directory
 
 The working directory is the folder where you `.git` folder lives and contain the files git is tracking. Files in the working directory can be in different states.
@@ -415,27 +436,6 @@ You can also resolve changes in different branches
 - Edit the file so it has the `Fonts` section, then the `Key Features` section.
 - Use `git add .` and `git commit -m "Added Fonts and Key Features"` to add both changes.
 - Use the `git log --graph` to see the commit graph history. Hit `q` to exit.
-
----
-
-## Connecting to Remote
-You can connect a local repo to a remote location like Github using the remote commands.
-- `git remote add <remote-name> https://github.com/<username>/<reponame>.git`
-	- The remote command is how we manage our connections to other places. 
-	- The traditional `remote-name` is `origin` and it will be the default if you clone a repo from GitHub.
-	- After the `remote-name` is the URL to Github, this usually have your `username` and `repository` name, but it can also have an `organization` name. It should also always end with `.git`
-	- You can add multiple remotes if you want to 
-- `git push -u <remote-name> main`
-	- In addition to connecting to the remote, you also have to connect branches with their counterparts on GitHub.
-	- The `-u` sets the default upstream branch for a branch, making pull and git push operations so you don't have to specify the remote and branch each time.
-	- You can also push all branches to the remote with `git push --all`
-
-### Exercises
-Lets connect our local repository to our GitHub repo.
-- **Copy** the URL to your GitHub repository
-- On your local copy of the repo, type in `https://github.com/<username>/<reponame>.git` using your username and reponame.
-- Issue a `git push -u origin main` to push your main directory
-- Go back to your GitHub Repo and see the updated repo.
 
 ---
 
