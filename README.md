@@ -17,15 +17,17 @@ Let's take about what Git is and what makes it different.
 In essence, Git is a multiverse time machine, somewhat similar to what you see in Marvel or Star Trek movies. It lets you travel back in time to difference checkpoints you save and lets you create alternative timelines to try out new code.
 
 - **Repo** (repository)
-	- The place where the data is stored is called a repository or repo for short. This data is stored in an invisible folder that keeps the history of the changes made to the files. Git only keeps track of original files and any changes that have been made to them. Repositories can be stored locally or remotely.
+	- The place where the data is stored is called a **repository** or **repo** for short. This data is stored in an **invisible** folder that keeps the **history** of the changes made to the files. Git only keeps track of original files and any changes that have been made to them. Repositories can be stored **locally** or **remotely**.
 - **Check points** (commits)
-	- With Git, you can lock in time codes that you may want to go back to go back to later on. These are known as commits. Each commit will have an ID, and lock in the current status of all of the files in the tracked folder.
+	- With Git, you can **lock in** time codes that you may want to go back to go back to later on. These are known as **commits**. Each commit will have an **ID**, and store the current status of all of the files in the tracked folder.
 - **Alternate history** (branches)
-	- You can create an alternate history of the project by creating different branches. That creates a new universe where you or others can experiment without messing up the main version of the project. You can create as many branches as you like.
+	- You can create an **alternate history** of the project by creating different **branches**. That creates a new universe where you or others can experiment without messing up the main version of the project. You can create as many branches as you like. Branches are the preferred way of making changes to your content because it leaves the original untouched.
 - **Synchronization** (merging)
-	- When you're ready to lock in the changes on the official (main) version of the project, you perform a merge command. That allows you to synchronize the different versions and bring the main branch up to date.
+	- When you're ready to lock in the changes on the official (main) version of the project, you perform a **merge** command. That allows you to **synchronize** the different versions and bring the main branch up to date.
 - **Publishing** (pull/push)
-	- Projects are usually published on a remote server, know as the origin, which allows many people to have access to the project. As an individual you can pull to get information from the server, or push to send your changes.
+	- Projects are usually published on a remote server, know as the **origin**, which allows many people to have access to the project. As an individual you can pull to get information from the server, or push to send your changes.
+- **Releasing** (Pull Requests/Discussions)
+	- To deploy projects officially, you go through a process of updating the repository on the cloud through a process often called Gitflow. You issue a request for the changes to be added to the released softare (**pull request**) and discuss the proposed changes with your team, then the changes get merged on the remote repository.
 
 ---
 
@@ -37,7 +39,7 @@ In this class and in GitHub in general, you can use Git in one of two ways.
 ---
 
 ## Local Configuration
-You can install Git locally by [downloading the git downloader]([url](https://git-scm.com)) on a PC. For a mac, you'll need to install x-code, [homebrew]([url](https://brew.sh/)) and then the git client through homebrew. I [created a video]([url](https://youtu.be/2T_zWr5n8RE)) for you.
+You can install Git locally by [downloading the git downloader]([url](https://git-scm.com)) on a PC. For a mac, you'll need to install x-code (app store), [homebrew]([url](https://brew.sh/)) and then the git client through homebrew. I [created a video]([url](https://youtu.be/2T_zWr5n8RE)) for you.
 
 Once you do that, you'll need to use a terminal or the GitBash application that came with the Git Installation. Then you need to run these two commands.
 
@@ -57,11 +59,31 @@ Once you've downloaded and installed Git, there's a few basic set up commands yo
 - `git init`
 	- The `git init` command creates an invisible `.git` folder, which git uses to store the changes to the files being tracked by the application.
 - `git status`
-	- The `git status` command lets you know the status of your files. 
-	- Git will give you a detailed description of what's happening with your documents. 
-	- It will also give you some instructions as to what you need to do to change things.
+	- The `git status` command shows the status of your files. 
+	- Shows detailed description of where documents are in the git process.
+	- Shows hints about how to change things.
 - `rm -r .git`
 	- You can ask git not to track your files any longer by removing the `.git` folder using `rm -r .git`. This can be dangerous because it removes all history, but it can also be beneficial when you are starting a new project based on an old one or want to start your history fresh.
+
+---
+## Cloud Setup
+In addition to settings things up locally, you'll need to set things up in the cloud, the easiest way to do that is to go to github.new.
+
+- Template
+	- You may choose a template, which lets you base a new project on an existing project (more on setting this up later.)
+- Owner/Repository Name
+	- Next, you have to choose which owner is in charge of this repo so that it's associated with that account, then give the repository a name. There are some limits to how you can name things. For example, you can't use spaces, so underscores and hyphens are common.
+Description
+	- The description is important because that's how you'll identify this repo when you're searching for it.
+- Public/Private
+	- This option will determine which features are available, specially on free plans. For this class, use public.
+- README
+	You can ask a repo to include a README file. The first document people see when they look at the repo. Ignore this if you have a local file.
+- `.gitignore` 
+	- This is a special invisible file that will tell GitHub NOT to upload certain files or folders to the server. Important to avoid passwords and local setup files from uploading.
+- license
+	- The license file tells people browsing on GitHub the permissions you're giving to the files and how to use them. The regular (non-enterprise) GitHub is meant to be a place where people can comment on public code.
+
 
 ---
 
