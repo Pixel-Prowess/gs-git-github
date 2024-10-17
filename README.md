@@ -292,7 +292,7 @@ Let's practice using these different options.
 
 #### Soft Reset
 - Issue a `git add .` and `git commit "bogus commit"`
-- Issue a `git --oneline` command to verify the new commit and hit `q` to exit the log.
+- Issue a `git log --oneline` command to verify the new commit and hit `q` to exit the log.
 - Issue a `git reset --soft HEAD~1` to reset the file.
 - Issue a `git status` command and note that `README.md` file is in the staging area ready to be committed.
 
