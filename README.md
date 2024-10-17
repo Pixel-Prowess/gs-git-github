@@ -62,7 +62,7 @@ Once you've downloaded and installed Git, there's a few basic set up commands yo
 	- The `git status` command shows the status of your files. 
 	- Shows detailed description of where documents are in the git process.
 	- Shows hints about how to change things.
-- `rm -r .git`
+- `rm -dfr .git`
 	- You can ask git not to track your files any longer by removing the `.git` folder using `rm -r .git`. This can be dangerous because it removes all history, but it can also be beneficial when you are starting a new project based on an old one or want to start your history fresh.
 
 ---
@@ -83,28 +83,6 @@ Description
 	- This is a special invisible file that will tell GitHub NOT to upload certain files or folders to the server. Important to avoid passwords and local setup files from uploading.
 - license
 	- The license file tells people browsing on GitHub the permissions you're giving to the files and how to use them. The regular (non-enterprise) GitHub is meant to be a place where people can comment on public code.
-
-
----
-
-## Connecting to Remote
-You can connect a local repo to a remote location like Github using the remote commands.
-- `git remote add <remote-name> https://github.com/<username>/<reponame>.git`
-	- The remote command is how we manage our connections to other places. 
-	- The traditional `remote-name` is `origin` and it will be the default if you clone a repo from GitHub.
-	- After the `remote-name` is the URL to Github, this usually have your `username` and `repository` name, but it can also have an `organization` name. It should also always end with `.git`
-	- You can add multiple remotes if you want to 
-- `git push -u <remote-name> main`
-	- In addition to connecting to the remote, you also have to connect branches with their counterparts on GitHub.
-	- The `-u` sets the default upstream branch for a branch, making pull and git push operations so you don't have to specify the remote and branch each time.
-	- You can also push all branches to the remote with `git push --all`
-
-### Exercises
-Lets connect our local repository to our GitHub repo.
-- **Copy** the URL to your GitHub repository
-- On your local copy of the repo, type in `https://github.com/<username>/<reponame>.git` using your username and reponame.
-- Issue a `git push -u origin main` to push your main directory
-- Go back to your GitHub Repo and see the updated repo.
 
 ---
 
@@ -136,7 +114,7 @@ The working directory is the folder where you `.git` folder lives and contain th
 
 Let's talk about the process of moving files into the staging state. There's a few [commands](https://git-scm.com/docs/git-add) you can use. 
 
-- `git add <filename>`
+- run `git status`, then `git add <filename>`, then run `git status`
 	- This allows you to move one or more files to staging. 
 	- You can stage individual files by using git add and then specifying a filename you want to add.
 	- That filename can support any file glob or shortcut.
@@ -152,8 +130,8 @@ Let's talk about the process of moving files into the staging state. There's a f
 ### Exercise
 
 Let's practice moving files in and out of staging.
-- Stage a single file using `git add <filename>`
-- Unstage a file using `git restore --staged <filename>`
+- Stage a single file using `git add index.html`
+- Unstage a file using `git restore -S <filename>`
 - Stage all files using `git add .`, `git add *`, `git add --all` or `git add -A`
 - Unstage all of the images using `git rm -r --cached images/**`
 - Re-stage all the images using `git add .`
@@ -169,8 +147,6 @@ To create a commit, you can issue a [commit command](https://git-scm.com/docs/gi
 	- The message acts as a label you'll see when going over a list of commits.
 	- It can be quite complex and include the changes you've made to the files since the last commit, but the most important part is the label, since it's what you'll see most often.
 	- The shortcut for the `--message` option is `-m`
-- `git commit -m --dry-run "Message"`
-	- The `--dry-run` option lets you take a look at the changes you're making, so it might be helpful when writing your message.
 - `git add . && git commit -m "Message"`
 	- Some people will use the double ampersands to queue up two git commands together, specially the add and commit commands.
 - `git log`
@@ -220,6 +196,7 @@ Using a no-edit option to add to an existing commit
 - Save it and do a `git status` to see that the file is currently listed as modified.
 - Add the file using `git add README.md`
 - Issue the `git commit --amend --no-edit` command to add the changes.
+- **Note:** Be careful that amend has only one m. I often try to add two m's in there.
 - **Note:** Remember that this works well for solo developers, but when working with a team pushing amends could cause problems for those who already pulled a previously committed history.
 
 #### Untracked files
@@ -267,7 +244,7 @@ Let's try the restore command a few different ways.
 `git restore` doesn't work on staged files, so to restore that you have to use the `--staged` option.
 - Paste the section of the file again (or use undo) to update the `README.me` file.
 - Issue a `git add . command` to stage the file
-- Try issuing a `git restore` command. Notice the file still has the new changes.
+- Try issuing a `git restore README` command. Notice the file still has the new changes.
 - Run `git status` and notice that the file is still in staging ready to be committed because restore by itself won't have an effect without the `--staged` option.
 - Run the `git restore --staged .` command, and you can see that the period command will restore all the staged files, but leave the changes.
 - If you want to get rid of the changes, issue the `git restore .` command.
@@ -286,7 +263,7 @@ You can also restore a previous version from an older commit.
 
 ## Rewriting History
 
-When you make a mistake, you can use the [git reset](https://git-scm.com/docs/git-reset) command to reset history to a previous commit ID. This rewrites the position of the HEAD pointer, whereas restore leaves it alone.
+When you make a mistake, you can use the [git reset](https://git-scm.com/docs/git-reset) command to reset history to a previous commit ID. This rewrites the position of the HEAD pointer, whereas restore leaves it alone. The HEAD pointer is 
 
 - **HEAD pointer**
 	- When you use the git log command, you'll noice that there's something called a HEAD pointer at the top of your commit messages. This represents the tip of your current branch.
@@ -324,7 +301,7 @@ Let's practice using these different options.
 - Make sure you save the file.
 - Issue a `git add . && git commit -m "Additional bogus commit"` command.
 - Issue a `git log --oneline` to make sure the new commit exists.
-- Copy the short hash id (i.e. d697c6f) to the commit you want to revert to, then hit the `q` key to exit.
+- Copy the short hash id (i.e. 5a50495) to the commit you want to revert to, then hit the `q` key to exit.
 - Issue a `git reset --hard ID` where the ID is the number you copied.
 - Notice all your changes have been removed.
 - Issue a `git log --online` to verify the bogus commits are gone.
@@ -360,6 +337,28 @@ Create a new `.gitignore` file at the root level of your project.
 
 #### Note
 Empty folders are not tracked or uploaded to GitHub. If you want to makes sure a folder gets uploaded to GitHub, you can just add a `.gitignore` or any other dot file like `.gitkeep`, even if they're empty.
+
+
+---
+
+## Connecting Local to Remote
+You can connect a local repo to a remote location like Github using the remote commands.
+- `git remote add <remote-name> https://github.com/<username>/<reponame>.git`
+	- The remote command is how we manage our connections to other places. 
+	- The traditional `remote-name` is `origin` and it will be the default if you clone a repo from GitHub.
+	- After the `remote-name` is the URL to Github, this usually have your `username` and `repository` name, but it can also have an `organization` name. It should also always end with `.git`
+	- You can add multiple remotes if you want to 
+- `git push -u <remote-name> main`
+	- In addition to connecting to the remote, you also have to connect branches with their counterparts on GitHub.
+	- The `-u` sets the default upstream branch for a branch, making pull and git push operations so you don't have to specify the remote and branch each time.
+	- You can also push all branches to the remote with `git push --all`
+
+### Exercises
+Lets connect our local repository to our GitHub repo.
+- **Copy** the URL to your GitHub repository
+- On your local copy of the repo, paste the URL from GitHub.
+- Issue a `git push -u origin main` to push your main directory
+- Go back to your GitHub Repo and see the updated repo.
 
 ---
 
