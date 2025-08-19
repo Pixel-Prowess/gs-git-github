@@ -170,10 +170,12 @@ Lets take a look at the information that Git is saving about our project. You ca
 
 An amend will add modified information or changed files to an existing commit.
 
-- `git commit -m --amend "Message"`
+- `git commit --amend -m "Update README"`
 	- You use it if you forget to commit something or want to make some minor modifications to a commit.
 	- This is also a way to change the commit message, if you made a typo or want to add some context
-	- **Warning!** This does not add untracked files to your commit, so if you have created or copied new files, you'll need to add them first.
+	- **Warning!** Be careful that --amend happens before -m or it will read --amend as part of the message.
+    - **Warning!** This does not add untracked files to your commit, so if you have created or copied new files, you'll need to add them first.
+	- **Warning!** amend has only one m and you can use two dashes.
 	- **Warning!** This is good for local commits, or when working solo, but can be dangerous when working in a team environment, if someone has work based on the previous version of a commit.
 -  `git commit -am "Message"`
 	- You can use `-a` as the shortcut for the amend command.
@@ -203,7 +205,7 @@ Using a no-edit option to add to an existing commit
 Untracked files will sometimes cause unexpected behaviors when committing and amending.
 - Copy the [next section](https://gist.githubusercontent.com/planetoftheweb/aa7731b1d782082f71b38cc89ff4d9de/raw/038609b40822b6388d176d22a2c0c06a219f4f7d/README.md) of text to the file titled **Notable Libraries and Technologies** and Paste them into the `README.md` file.
 - Add the file using `git add .`
-- Now, create a new document on the same folder called `LICENSE.txt`. Add this [MIT license](https://gist.githubusercontent.com/planetoftheweb/7e254040a0525971c45295ddabf25e84/raw/b45be12298e44c52b241cdd759c703b404b48220/LICENSE.txt) to the document, then update it with the year and your name.
+- Now, create a new document on the same folder called `LICENSE`. Add this [MIT license](https://gist.githubusercontent.com/planetoftheweb/7e254040a0525971c45295ddabf25e84/raw/b45be12298e44c52b241cdd759c703b404b48220/LICENSE.txt) to the document, then update it with the year and your name.
 - Now you should have one untracked file and one modified file. Let's see what happens if you commit.
 - Try a `git commit -m "Modified README and added a LICENSE"`.
 - Issue a `git status` command. Notice that because the `LICENSE.txt` file was untracked, it wasn't committed and you didn't get any sort of error message.
